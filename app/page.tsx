@@ -62,9 +62,6 @@ export default function Home() {
             />
           </div>
         </h1>
-        <button onClick={() => window.open('https://google.com', '_blank')}>
-          Testar Link
-        </button>
         <p className="mb-6 text-center text-gray-700">
           A aplicação inteligente que te ajuda a analisar jogos de futebol e melhorar suas apostas. Aproveite esta oferta exclusiva por tempo limitado!
         </p>
