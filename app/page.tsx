@@ -14,6 +14,8 @@ export default function Home() {
   const [email, setEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
+  const whatsappNumbers = ['+351962248268', '+37257851513', '+447440156075', '+351935992291']
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
@@ -25,14 +27,23 @@ export default function Home() {
 
       if (error) throw error
 
-      const whatsappUrl = `https://wa.me/351948968972?text=${encodeURIComponent('Olá, gostaria de começar a usar o FootballPro AI gratuitamente!')}`
-      window.location.href = whatsappUrl
+      alert('Dados enviados com sucesso!')
     } catch (error) {
       console.error('Erro ao enviar dados:', error)
       alert('Ocorreu um erro ao enviar os seus dados. Por favor, tente novamente.')
     } finally {
       setIsLoading(false)
     }
+  }
+
+  const handleWhatsAppRedirect = () => {
+    const randomIndex = Math.floor(Math.random() * whatsappNumbers.length)
+    const randomWhatsappNumber = whatsappNumbers[randomIndex]
+
+    const whatsappUrl = `https://wa.me/${randomWhatsappNumber}?text=${encodeURIComponent(
+      'Olá, gostava de começar a usar o WinnerGPT à borla!'
+    )}`
+    window.open(whatsappUrl, '_blank')
   }
 
   return (
@@ -51,6 +62,9 @@ export default function Home() {
             />
           </div>
         </h1>
+        <button onClick={() => window.open('https://google.com', '_blank')}>
+          Testar Link
+        </button>
         <p className="mb-6 text-center text-gray-700">
           A aplicação inteligente que te ajuda a analisar jogos de futebol e melhorar suas apostas. Aproveite esta oferta exclusiva por tempo limitado!
         </p>
@@ -100,24 +114,19 @@ export default function Home() {
           <button
             type="submit"
             disabled={isLoading}
+            onClick={handleWhatsAppRedirect}
             className="w-full px-6 py-3 text-white bg-green-600 rounded-md text-lg font-semibold hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50"
           >
             {isLoading ? 'A Enviar...' : 'Quero Acesso Agora'}
           </button>
         </form>
         <p className="mt-2 text-sm text-center text-gray-500">
-        Será redirecionado para o WhatsApp para receber as instruções sobre como instalar a aplicação.
+          Será redirecionado para o WhatsApp para receber as instruções sobre como instalar a aplicação.
         </p>
         <p className="mt-6 text-sm text-center text-gray-500">
           Garantimos a segurança dos teus dados. Esta oferta é válida por tempo limitado.
         </p>
-        <div className="mt-6 flex justify-center space-x-4">
-          <Image src="/premier-league.png" width={40} height={40} alt="Premier League" className="" />
-          <Image src="/liga-portugal.png" width={40} height={40} alt="liga-portugal" className="" />
-          <Image src="/Champions-League.png" width={40} height={40} alt="Bundesliga" className="" />
-        </div>
       </div>
     </main>
   )
 }
-
